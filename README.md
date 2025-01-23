@@ -1,5 +1,5 @@
 # San2Patch
-San2Patch: Generating Patch from Sanitizer Log Through Hierarchical Reasoning with LLM
+Logs In, Patches Out: Automated Vulnerability Repair via Tree-of-Thought LLM Analysis
 
 
 # Install
