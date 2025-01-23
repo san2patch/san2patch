@@ -23,7 +23,7 @@ class San2PatchDataset(BaseDataset):
         self.logger.info("Downloading dataset {self.name}")
 
         self.run_cmd(
-            f"git clone https://github.com/san2patch/san2vuln/",
+            f"git clone https://github.com/san2patch/san2patch-benchmark/",
             cwd=self.download_dir,
         )
 

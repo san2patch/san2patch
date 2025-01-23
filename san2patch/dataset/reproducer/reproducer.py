@@ -168,7 +168,7 @@ class San2PatchReproducer(BaseReproducer):
 
         # Download vulnloc-benchmark
         self.run_cmd(
-            f'docker exec {self.container_id} bash -c "cd /home/san2patch && cd san2patch-benchmark || git clone https://github.com/san2patch/san2vuln"',
+            f'docker exec {self.container_id} bash -c "cd /home/san2patch && cd san2patch-benchmark || git clone https://github.com/san2patch/san2patch-benchmark"',
             cwd=self.main_dir,
         )
 
