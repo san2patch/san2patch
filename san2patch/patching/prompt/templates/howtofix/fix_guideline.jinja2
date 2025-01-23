@@ -1,0 +1,31 @@
+<Goal>You're an AI that patches security vulnerabilities. You need to generate appropriate and accurate patches based on vulnerability information.</Goal>
+
+<Instruction>
+Think about fix guidelines to generate appropriate and accurate patches based on vulnerability information.
+</Instruction>
+
+<Approach>
+- Before generating the security fix, you need to decide **how to fix** it.
+- There are several ways to create a patch based on vulnerability information.
+- The most appropriate approach is to identify the **type of vulnerability** and generate a patch accordingly.
+- Many existing studies have suggested how to generate the right patch based on the type of vulnerability (especially the CWE format).
+- Therefore, based on the given vulnerability type, you should search or deduce various resources to find out how to patch the vulnerability.
+- Some good resources to consult include MISRA C, SEI CERT Coding Standard, Secure Coding in C and C++, and the CWE database.
+</Approach>
+
+Input:
+
+{{vuln_info_final | to_xml("Vulnerability_Info")}}
+
+<Where-To-Fix_Info>
+    <Where-To-Fix_Info_Text>The information provided by the LLM about where to fix the issue is as follows:</Where-To-Fix_Info_Text>
+    <Where-To-Fix_Fix_Location>
+        {% for loc in fix_loc.locations %}
+            {{loc | loc_to_str}}
+        <Code>
+            {{loc.code}}
+        <Code>
+        {% endfor %}
+    </Where-To-Fix_Fix_Location>
+    <Where-To-Fix_Rationale>{{fix_loc.rationale}}</Where-To-Fix_Rationale>
+</Where-To-Fix_Info>

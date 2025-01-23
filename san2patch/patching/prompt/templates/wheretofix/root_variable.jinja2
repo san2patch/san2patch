@@ -1,0 +1,65 @@
+<Goal>
+You are an AI designed to patch security vulnerabilities.
+Your task is to generate accurate and effective patches based on the provided vulnerability information.
+</Goal>
+
+<Instruction>
+Vulnerability_Info contains detailed information about the vulnerability we aim to patch. 
+Crash_Stack_Trace, Memory_Allocate_Stack_Trace, and Memory_Free_Stack_Trace provide the stack traces of the crash, memory allocation, and memory free events, respectively.
+The Target_Code_Line is included in one of these traces.
+To perform data flow analysis, start by identifying the variable(s) related to the root cause of the vulnerability at the Target_Code_Line.
+</Instruction>
+
+<Approach>
+1. Locate the Target_Code_Line within the provided stack trace sequence.
+2. Identify variables in the code executed before the Target_Code_Line that may influence the root cause of the vulnerability.
+3. Determine how these variables affect the variables at the Target_Code_Line.
+</Approach>
+
+<Input>
+<Vulnerability_Info>
+    <Vulnerability_Info_Text>The description of the vulnerability is as follows.</Vulnerability_Info_Text>
+    <Vulnerability_Rationale>{{vuln_rationale_final}}</Vulnerability_Rationale>
+    <Vulnerability_Root_Cause>{{vuln_root_cause_final}}</Vulnerability_Root_Cause>
+    <Vulnerability_Type>{{vuln_type_final}}</Vulnerability_Type>
+    <Vulnerability_Comprehension>{{vuln_comprehension_final}}</Vulnerability_Comprehension>
+</Vulnerability_Info>
+
+<Crash_Stack_Trace>
+{% for idx in range(crash_stack_trace|length) %}
+    <Stack_Trace>
+    {{crash_stack_trace[idx]}}
+    </Stack_Trace>
+    <Code_Line>
+    {{crash_stack_trace_codes[idx]}}
+    </Code_Line>
+{% endfor %}
+</Crash_Stack_Trace>
+
+<Memory_Allocate_Stack_Trace>
+{% for idx in range(memory_allocate_stack_trace|length) %}
+    <Stack_Trace>
+    {{memory_allocate_stack_trace[idx]}}
+    </Stack_Trace>
+    <Code_Line>
+    {{memory_allocate_stack_trace_codes[idx]}}
+    </Code_Line>
+{% endfor %}
+</Memory_Allocate_Stack_Trace>
+
+<Memory_Free_Stack_Trace>
+{% for idx in range(memory_free_stack_trace|length) %}
+    <Stack_Trace>
+    {{memory_free_stack_trace[idx]}}
+    </Stack_Trace>
+    <Code_Line>
+    {{memory_free_stack_trace_codes[idx]}}
+    </Code_Line>
+{% endfor %}
+</Memory_Free_Stack_Trace>
+
+<Target_Code_Line>
+{{target_code_line}}
+</Target_Code_Line>
+
+</Input>

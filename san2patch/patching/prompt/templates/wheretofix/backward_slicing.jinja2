@@ -1,0 +1,32 @@
+<Goal>
+You are an AI designed to patch security vulnerabilities.
+Your task is to generate accurate and effective patches based on the provided vulnerability information.
+</Goal>
+
+<Instruction>
+Vulnerability_Info contains information about the vulnerability we aim to patch.
+The Target_Code_Line is included in the crash stack trace.
+To determine which part of the code needs modification, additional data flow analysis and program slicing must be performed.
+Infer the variables from the Target_Code_Line that are related to the vulnerability, and extract the associated program slices from Code_Context.
+Focus on extracting only the essential program slices necessary for patching the vulnerability; avoid extracting excessive results. Extract up to 5 lines of code.
+Provide the identified code lines in the form of a backward program slice.
+Note that you must exclude the Target_Code_Line from the backward program slice.
+</Instruction>
+
+<Approach>
+1. Identify which variable(s) might be causing the issue at the Target_Code_Line.
+2. Perform data flow analysis to track how the identified variable(s) are used and modified within the Code_Context.
+3. Determine the code lines within the Code_Context that directly or indirectly influence the Target_Code_Line through data flow.
+4. Extract the relevant code lines that contribute to the vulnerability or its root cause based on Vulnerability_Info.
+5. Present the identified final code lines as a backward program slice.
+</Approach>
+
+<Input>
+
+{{vuln_info_final | to_xml("Vulnerability_Info") | adjust_indent(1)}}
+
+{{code_context | to_xml("Code_Context") | adjust_indent(1)}}
+
+{{target_code_line | to_xml("Target_Code_Line") | adjust_indent(1)}}
+
+</Input>
